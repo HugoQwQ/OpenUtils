@@ -1,0 +1,19 @@
+{
+  "package": "org.afterlike.openutils.platform.mixin",
+  "refmap": "mixins.openutils.refmap.json",
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "minecraft.network.NetworkManagerMixin",
+    "minecraftforge.fml.common.LoadControllerMixin",
+    "minecraftforge.fml.common.network.handshake.ModListMixin"
+  ],
+  "client": [
+    "minecraft.client.MinecraftMixin",
+    "minecraft.client.multiplayer.PlayerControllerMPAccessor",
+    "minecraft.client.renderer.EntityRendererMixin",
+    "minecraft.client.settings.KeyBindingMixin",
+    "minecraft.gui.FontRendererMixin",
+    "minecraftforge.client.GuiIngameForgeMixin"
+  ]
+}
