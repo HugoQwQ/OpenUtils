@@ -12,8 +12,9 @@ import org.afterlike.openutils.module.api.ModuleCategory;
 import org.afterlike.openutils.module.impl.client.GuiModule;
 import org.afterlike.openutils.module.impl.minigames.ResourceTrackerModule;
 import org.afterlike.openutils.module.impl.movement.NullMoveModule;
+import org.afterlike.openutils.module.impl.movement.SprintModule;
 import org.afterlike.openutils.module.impl.other.NameHiderModule;
-import org.afterlike.openutils.module.impl.player.NoBreakDelay;
+import org.afterlike.openutils.module.impl.player.NoBreakDelayModule;
 import org.afterlike.openutils.module.impl.render.AntiShuffleModule;
 import org.afterlike.openutils.module.impl.render.HUDModule;
 import org.afterlike.openutils.module.impl.world.AntiBotModule;
@@ -27,8 +28,9 @@ public class ModuleHandler {
 		OpenUtils.get().getEventBus().subscribe(this);
 		// movement
 		this.register(new NullMoveModule());
+        this.register(new SprintModule());
 		// player
-		this.register(new NoBreakDelay());
+		this.register(new NoBreakDelayModule());
 		// render
 		this.register(new AntiShuffleModule());
 		this.register(new HUDModule());

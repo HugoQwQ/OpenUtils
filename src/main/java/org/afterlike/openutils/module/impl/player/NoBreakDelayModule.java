@@ -9,10 +9,10 @@ import org.afterlike.openutils.module.api.setting.impl.NumberSetting;
 import org.afterlike.openutils.platform.mixin.minecraft.client.multiplayer.PlayerControllerMPAccessor;
 import org.afterlike.openutils.util.client.ClientUtil;
 
-public class NoBreakDelay extends Module {
+public class NoBreakDelayModule extends Module {
 	public static DescriptionSetting description;
 	public static NumberSetting delay;
-	public NoBreakDelay() {
+	public NoBreakDelayModule() {
 		super("No Break Delay", ModuleCategory.PLAYER);
 		this.registerSetting(
 				description = new DescriptionSetting("Reduces the delay between block breaks"));
