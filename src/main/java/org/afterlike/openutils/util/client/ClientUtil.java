@@ -2,6 +2,8 @@ package org.afterlike.openutils.util.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
+import org.afterlike.openutils.OpenUtils;
+import org.afterlike.openutils.module.impl.client.DebugModule;
 import org.jetbrains.annotations.NotNull;
 
 public class ClientUtil {
@@ -10,7 +12,13 @@ public class ClientUtil {
 	public static void sendMessage(@NotNull final String message) {
 		if (notNull()) {
 			mc.thePlayer.addChatMessage(
-					new ChatComponentText(TextUtil.replaceColorCodes(prefix + " " + message)));
+					new ChatComponentText(TextUtil.replaceColorCodes(prefix + message)));
+		}
+	}
+
+	public static void sendDebugMessage(@NotNull final String message) {
+		if (notNull() && OpenUtils.get().getModuleHandler().isEnabled(DebugModule.class)) {
+			sendMessage("&c[DEBUG] &r" + message);
 		}
 	}
 

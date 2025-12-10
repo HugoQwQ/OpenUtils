@@ -12,7 +12,7 @@ import org.afterlike.openutils.module.api.setting.impl.BooleanSetting;
 import org.afterlike.openutils.module.api.setting.impl.DescriptionSetting;
 import org.afterlike.openutils.module.api.setting.impl.ModeSetting;
 import org.afterlike.openutils.module.api.setting.impl.NumberSetting;
-import org.afterlike.openutils.module.impl.client.GuiModule;
+import org.afterlike.openutils.module.impl.client.GUIModule;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
@@ -220,7 +220,7 @@ public class ModuleComponent extends Component {
 	}
 
 	private static ModeSetting getThemeSetting() {
-		return OpenUtils.get().getModuleHandler().getModuleClass(GuiModule.class)
+		return OpenUtils.get().getModuleHandler().getModuleClass(GUIModule.class)
 				.getSetting("theme");
 	}
 }

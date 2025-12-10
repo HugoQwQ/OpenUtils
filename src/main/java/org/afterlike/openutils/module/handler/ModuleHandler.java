@@ -11,13 +11,13 @@ import org.afterlike.openutils.event.impl.KeyPressEvent;
 import org.afterlike.openutils.module.api.Module;
 import org.afterlike.openutils.module.api.ModuleCategory;
 import org.afterlike.openutils.module.api.setting.impl.BooleanSetting;
+import org.afterlike.openutils.module.impl.client.*;
+import org.afterlike.openutils.module.impl.minigames.*;
 import org.afterlike.openutils.module.impl.movement.*;
+import org.afterlike.openutils.module.impl.other.*;
 import org.afterlike.openutils.module.impl.player.*;
 import org.afterlike.openutils.module.impl.render.*;
 import org.afterlike.openutils.module.impl.world.*;
-import org.afterlike.openutils.module.impl.minigames.*;
-import org.afterlike.openutils.module.impl.client.*;
-import org.afterlike.openutils.module.impl.other.*;
 import org.afterlike.openutils.util.client.ClientUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,8 +32,8 @@ public class ModuleHandler {
 		this.register(new SprintModule());
 		// player
 		this.register(new NoBreakDelayModule());
-        this.register(new NoJumpDelayModule());
-        this.register(new NoHitDelayModule());
+		this.register(new NoJumpDelayModule());
+		this.register(new NoHitDelayModule());
 		// render
 		this.register(new AntiShuffleModule());
 		this.register(new HUDModule());
@@ -44,7 +44,8 @@ public class ModuleHandler {
 		// other
 		this.register(new NameHiderModule());
 		// client
-		this.register(new GuiModule());
+		this.register(new DebugModule());
+		this.register(new GUIModule());
 	}
 
 	private void register(@NotNull final Module module) {

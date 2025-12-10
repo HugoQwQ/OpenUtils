@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(EntityLivingBase.class)
 public interface EntityLivingBaseAccessor {
-
-    @Accessor("jumpTicks")
-    void ou$setJumpTicks(int ticks);
+	@Accessor("jumpTicks")
+	void ou$setJumpTicks(int ticks);
 }

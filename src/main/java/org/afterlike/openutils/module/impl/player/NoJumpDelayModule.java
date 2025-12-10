@@ -11,24 +11,23 @@ import org.afterlike.openutils.util.client.ClientUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class NoJumpDelayModule extends Module {
+	private final BooleanSetting onlyWhileMoving;
+	public NoJumpDelayModule() {
+		super("No Jump Delay", ModuleCategory.PLAYER); // maybe move to movement?
+		onlyWhileMoving = this.registerSetting(new BooleanSetting("Only while moving", false));
+	}
 
-    private final BooleanSetting onlyWhileMoving;
-
-    public NoJumpDelayModule() {
-        super("No Jump Delay", ModuleCategory.PLAYER); // maybe move to movement?
-        onlyWhileMoving = this.registerSetting(new BooleanSetting("Only while moving", false));
-    }
-
-    @EventHandler
-    private void onTick(final @NotNull GameTickEvent event) {
-        if (event.getPhase() != EventPhase.PRE) return;
-        if (!ClientUtil.notNull()) return;
-
-        if (onlyWhileMoving.getValue()) {
-            if (mc.thePlayer.motionX == 0.0 &&  mc.thePlayer.motionZ == 0.0) return;
-        }
-
-        EntityLivingBaseAccessor accessor =  (EntityLivingBaseAccessor) mc.thePlayer;
-        accessor.ou$setJumpTicks(0);
-    }
+	@EventHandler
+	private void onTick(final @NotNull GameTickEvent event) {
+		if (event.getPhase() != EventPhase.PRE)
+			return;
+		if (!ClientUtil.notNull())
+			return;
+		if (onlyWhileMoving.getValue()) {
+			if (mc.thePlayer.motionX == 0.0 && mc.thePlayer.motionZ == 0.0)
+				return;
+		}
+		EntityLivingBaseAccessor accessor = (EntityLivingBaseAccessor) mc.thePlayer;
+		accessor.ou$setJumpTicks(0);
+	}
 }

@@ -9,10 +9,10 @@ import org.afterlike.openutils.util.client.ClientUtil;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.input.Keyboard;
 
-public class GuiModule extends Module {
+public class GUIModule extends Module {
 	private final ModeSetting theme;
-	public GuiModule() {
-		super("Gui", ModuleCategory.CLIENT, Keyboard.KEY_RSHIFT);
+	public GUIModule() {
+		super("GUI", ModuleCategory.CLIENT, Keyboard.KEY_RSHIFT);
 		theme = this.registerSetting(
 				new ModeSetting("Theme", "Raven B3", "Raven B1", "Raven B2", "Raven B3"));
 	}
