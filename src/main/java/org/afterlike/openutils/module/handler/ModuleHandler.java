@@ -33,8 +33,9 @@ public class ModuleHandler {
 		this.register(new NoHitDelayModule());
 		// render
 		this.register(new AntiShuffleModule());
-        this.register(new AntiDebuffModule());
+		this.register(new AntiDebuffModule());
 		this.register(new ArrayListModule());
+		this.register(new CameraModule());
 		// world
 		this.register(new AntiBotModule());
 		// minigames

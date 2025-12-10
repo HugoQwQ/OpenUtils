@@ -14,6 +14,7 @@
     "minecraft.client.MinecraftAccessor",
     "minecraft.client.MinecraftMixin",
     "minecraft.client.multiplayer.PlayerControllerMPAccessor",
+    "minecraft.client.renderer.EntityRendererAccessor",
     "minecraft.client.renderer.EntityRendererMixin",
     "minecraft.client.settings.KeyBindingAccessor",
     "minecraft.client.settings.KeyBindingMixin",
