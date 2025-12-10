@@ -15,7 +15,12 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
-public class MinecraftMixin {
+public abstract class MinecraftMixin {
+	@Inject(method = "startGame", at = @At("HEAD"))
+	private void startGame$head(final @NotNull CallbackInfo callbackInfo) {
+		OpenUtils.get().initialize();
+	}
+
 	@Inject(method = "startGame", at = @At(value = "CONSTANT", args = "stringValue=Post startup"))
 	private void ou$startGame$postStartup(@NotNull final CallbackInfo ci) {
 		OpenUtils.get().lateInitialize();

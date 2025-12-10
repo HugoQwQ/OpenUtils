@@ -7,7 +7,6 @@
     "minecraft.entity.EntityLivingBaseAccessor",
     "minecraft.entity.EntityLivingBaseMixin",
     "minecraft.network.NetworkManagerMixin",
-    "minecraftforge.fml.common.LoadControllerMixin",
     "minecraftforge.fml.common.network.handshake.ModListMixin"
   ],
   "client": [
