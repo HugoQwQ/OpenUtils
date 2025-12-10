@@ -3,6 +3,7 @@ package org.afterlike.openutils.gui.component.impl;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.afterlike.openutils.OpenUtils;
 import org.afterlike.openutils.gui.component.Component;
 import org.afterlike.openutils.gui.panel.CategoryPanel;
@@ -98,13 +99,14 @@ public class ModuleComponent extends Component {
 		float r = 0.0F;
 		float g = 0.0F;
 		float b = 0.0F;
-		final String theme = getThemeSetting().getValue();
-		if ("Raven B1".equalsIgnoreCase(theme)) {
+		final String theme = Objects.requireNonNull(OpenUtils.get().getModuleHandler()
+				.getModuleClass(GUIModule.class).getSetting("Theme", ModeSetting.class)).getValue();
+		if ("raven b1".equalsIgnoreCase(theme)) {
 			a = (h >> 14 & 0xFF) / 255.0F;
 			r = (h >> 5 & 0xFF) / 255.0F;
 			g = (h >> 5 & 0xFF) / 2155.0F;
 			b = h & 0xFF;
-		} else if ("Raven B2".equalsIgnoreCase(theme)) {
+		} else if ("raven b2".equalsIgnoreCase(theme)) {
 			a = (h >> 14 & 0xFF) / 255.0F;
 			r = (h >> 5 & 0xFF) / 2155.0F;
 			g = (h >> 5 & 0xFF) / 255.0F;
@@ -136,14 +138,16 @@ public class ModuleComponent extends Component {
 				this.module.isEnabled() ? this.enabledFillColor : -12829381,
 				this.module.isEnabled() ? this.enabledFillColor : -12302777);
 		GL11.glPushMatrix();
-		final boolean themeHighlight = getThemeSetting().getValue().equalsIgnoreCase("Raven B3");
-		final int button_rgb = themeHighlight
+		final String theme = Objects.requireNonNull(OpenUtils.get().getModuleHandler()
+				.getModuleClass(GUIModule.class).getSetting("Theme", ModeSetting.class)).getValue();
+		final boolean themeB3 = theme.equalsIgnoreCase("raven b3");
+		final int buttonColor = themeB3
 				? (this.module.isEnabled() ? this.enabledTextColor : Color.lightGray.getRGB())
 				: Color.lightGray.getRGB();
 		mc.fontRendererObj.drawStringWithShadow(this.module.getName(),
 				this.panel.getX() + (float) this.panel.getWidth() / 2
 						- (float) mc.fontRendererObj.getStringWidth(this.module.getName()) / 2,
-				this.panel.getY() + this.yOffset + 4, button_rgb);
+				this.panel.getY() + this.yOffset + 4, buttonColor);
 		GL11.glPopMatrix();
 		if (this.expandedSettings && !this.settingComponents.isEmpty()) {
 			for (@NotNull final Component component : this.settingComponents) {
@@ -206,10 +210,5 @@ public class ModuleComponent extends Component {
 		return x > this.panel.getX() && x < this.panel.getX() + this.panel.getWidth()
 				&& y > this.panel.getY() + this.yOffset
 				&& y < this.panel.getY() + 16 + this.yOffset;
-	}
-
-	private static ModeSetting getThemeSetting() {
-		return OpenUtils.get().getModuleHandler().getModuleClass(GUIModule.class)
-				.getSetting("theme");
 	}
 }

@@ -40,11 +40,20 @@ public class Module {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <S extends Setting<?>> @Nullable S getSetting(String name) {
+	private <S extends Setting<?>> @Nullable S getSetting(String name) {
 		for (Setting<?> setting : settings) {
 			if (setting.getName().equalsIgnoreCase(name)) {
 				return (S) setting;
 			}
+		}
+		return null;
+	}
+
+	public <S extends Setting<?>> @Nullable S getSetting(@NotNull final String name,
+			@NotNull final Class<S> type) {
+		final Setting<?> setting = getSetting(name);
+		if (type.isInstance(setting)) {
+			return type.cast(setting);
 		}
 		return null;
 	}

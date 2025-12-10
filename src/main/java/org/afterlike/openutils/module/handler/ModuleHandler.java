@@ -1,9 +1,6 @@
 package org.afterlike.openutils.module.handler;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import net.minecraft.client.Minecraft;
 import org.afterlike.openutils.OpenUtils;
 import org.afterlike.openutils.event.handler.EventHandler;
@@ -36,7 +33,7 @@ public class ModuleHandler {
 		this.register(new NoHitDelayModule());
 		// render
 		this.register(new AntiShuffleModule());
-		this.register(new HUDModule());
+		this.register(new ArrayListModule());
 		// world
 		this.register(new AntiBotModule());
 		// minigames
@@ -106,10 +103,10 @@ public class ModuleHandler {
 
 	public @NotNull List<@NotNull Module> getEnabledModulesSorted() {
 		final List<@NotNull Module> enabled = getEnabledModules();
-		final HUDModule hud = getModuleClass(HUDModule.class);
-		final BooleanSetting alphabeticalSetting = hud.getSetting("alphabeticalSort");
-		final boolean alphabeticalSort = alphabeticalSetting != null
-				&& Boolean.TRUE.equals(alphabeticalSetting.getValue());
+		final ArrayListModule hud = getModuleClass(ArrayListModule.class);
+		final BooleanSetting alphabeticalSetting = hud.getSetting("Alphabetical sort",
+				BooleanSetting.class);
+		final boolean alphabeticalSort = Objects.requireNonNull(alphabeticalSetting).getValue();
 		if (alphabeticalSort) {
 			enabled.sort(Comparator.comparing(Module::getName));
 		} else {

@@ -14,7 +14,7 @@ public class GUIModule extends Module {
 	public GUIModule() {
 		super("GUI", ModuleCategory.CLIENT, Keyboard.KEY_RSHIFT);
 		theme = this.registerSetting(
-				new ModeSetting("Theme", "Raven B3", "Raven B1", "Raven B2", "Raven B3"));
+				new ModeSetting("Theme", "raven b3", "raven b1", "raven b2", "raven b3"));
 	}
 
 	@Override

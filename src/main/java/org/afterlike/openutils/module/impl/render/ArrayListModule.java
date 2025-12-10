@@ -19,13 +19,13 @@ import org.afterlike.openutils.util.game.RenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class HUDModule extends Module {
+public class ArrayListModule extends Module {
 	private final BooleanSetting editPosition;
 	private final BooleanSetting dropShadow;
 	private final BooleanSetting alphabeticalSort;
 	private int hudX = 5;
 	private int hudY = 70;
-	public HUDModule() {
+	public ArrayListModule() {
 		super("HUD", ModuleCategory.RENDER);
 		this.registerSetting(editPosition = new BooleanSetting("Edit position", false));
 		this.registerSetting(dropShadow = new BooleanSetting("Drop shadow", true));
@@ -78,8 +78,8 @@ public class HUDModule extends Module {
 			super.initGui();
 			this.buttonList.add(this.resetButton = new GuiButtonExt(1, this.width - 90, 5, 85, 20,
 					"Reset position"));
-			this.currentX = HUDModule.this.hudX;
-			this.currentY = HUDModule.this.hudY;
+			this.currentX = ArrayListModule.this.hudX;
+			this.currentY = ArrayListModule.this.hudY;
 		}
 
 		public void drawScreen(final int mX, final int mY, final float pt) {
@@ -93,8 +93,8 @@ public class HUDModule extends Module {
 			this.previewMinY = minY;
 			this.previewMaxX = maxX;
 			this.previewMaxY = maxY;
-			HUDModule.this.hudX = minX;
-			HUDModule.this.hudY = minY;
+			ArrayListModule.this.hudX = minX;
+			ArrayListModule.this.hudY = minY;
 			final ScaledResolution res = new ScaledResolution(this.mc);
 			final int x = res.getScaledWidth() / 2 - 84;
 			final int y = res.getScaledHeight() / 2 - 20;
@@ -112,7 +112,7 @@ public class HUDModule extends Module {
 			int y = this.previewMinY;
 			for (final String line : EditorGuiScreen.SAMPLE_TEXT.split("-")) {
 				fontRenderer.drawString(line, x, y, Color.white.getRGB(),
-						HUDModule.this.dropShadow.getValue());
+						ArrayListModule.this.dropShadow.getValue());
 				y += fontRenderer.FONT_HEIGHT + 2;
 			}
 		}
@@ -144,8 +144,8 @@ public class HUDModule extends Module {
 
 		protected void actionPerformed(final GuiButton button) {
 			if (button == this.resetButton) {
-				this.currentX = HUDModule.this.hudX = 5;
-				this.currentY = HUDModule.this.hudY = 70;
+				this.currentX = ArrayListModule.this.hudX = 5;
+				this.currentY = ArrayListModule.this.hudY = 70;
 			}
 		}
 
