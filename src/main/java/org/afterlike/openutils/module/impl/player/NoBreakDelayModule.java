@@ -1,5 +1,6 @@
 package org.afterlike.openutils.module.impl.player;
 
+import org.afterlike.openutils.event.api.EventPhase;
 import org.afterlike.openutils.event.handler.EventHandler;
 import org.afterlike.openutils.event.impl.GameTickEvent;
 import org.afterlike.openutils.module.api.Module;
@@ -22,11 +23,13 @@ public class NoBreakDelayModule extends Module {
 
 	@EventHandler
 	private void onTick(final @NotNull GameTickEvent event) {
-		if (ClientUtil.notNull()) {
-			PlayerControllerMPAccessor accessor = (PlayerControllerMPAccessor) mc.playerController;
-			if (accessor.ou$getBlockHitDelay() > delay.getInt()) {
-				accessor.ou$setBlockHitDelay(delay.getInt());
-			}
+		if (event.getPhase() != EventPhase.PRE)
+			return;
+		if (!ClientUtil.notNull())
+			return;
+		PlayerControllerMPAccessor accessor = (PlayerControllerMPAccessor) mc.playerController;
+		if (accessor.ou$getBlockHitDelay() > delay.getInt()) {
+			accessor.ou$setBlockHitDelay(delay.getInt());
 		}
 	}
 }

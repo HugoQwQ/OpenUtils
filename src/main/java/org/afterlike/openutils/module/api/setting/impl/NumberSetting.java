@@ -43,7 +43,11 @@ public class NumberSetting extends Setting<Double> {
 	}
 
 	public int getInt() {
-		return (int) Math.round(value);
+		return value.intValue();
+	}
+
+	public float getFloat() {
+		return value.floatValue();
 	}
 
 	public String getDisplayValue() {
