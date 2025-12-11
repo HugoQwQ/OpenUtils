@@ -22,6 +22,12 @@ public class ClientUtil {
 		}
 	}
 
+	public static void sendMessageAsPlayer(@NotNull final String message) {
+		if (notNull()) {
+			mc.thePlayer.sendChatMessage(message);
+		}
+	}
+
 	public static boolean notNull() {
 		return mc.thePlayer != null && mc.theWorld != null;
 	}

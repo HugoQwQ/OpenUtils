@@ -24,7 +24,7 @@ public class ModuleHandler {
 	public void initialize() {
 		OpenUtils.get().getEventBus().subscribe(this);
 		// movement
-		this.register(new NullMoveModule()); // TODO: impl
+		this.register(new NullMoveModule());
 		this.register(new SprintModule());
 		// player
 		this.register(new NoBreakDelayModule());
@@ -35,10 +35,13 @@ public class ModuleHandler {
 		this.register(new AntiShuffleModule());
 		this.register(new ArrayListModule());
 		this.register(new CameraModule());
+		this.register(new CapeModule());
+		this.register(new ThickRodsModule());
 		// world
 		this.register(new AntiBotModule());
 		// minigames
 		this.register(new ArmorAlertsModule());
+		this.register(new AutoGGModule());
 		this.register(new BedWarsHudModule());
 		this.register(new ItemAlertsModule());
 		this.register(new LevelHiderModule()); // TODO: impl

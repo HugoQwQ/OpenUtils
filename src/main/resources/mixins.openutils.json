@@ -4,6 +4,7 @@
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "minecraft.client.entity.AbstractClientPlayerMixin",
     "minecraft.entity.EntityLivingBaseAccessor",
     "minecraft.entity.EntityLivingBaseMixin",
     "minecraft.network.NetworkManagerMixin",
@@ -15,6 +16,7 @@
     "minecraft.client.multiplayer.PlayerControllerMPAccessor",
     "minecraft.client.renderer.EntityRendererAccessor",
     "minecraft.client.renderer.EntityRendererMixin",
+    "minecraft.client.renderer.entity.RenderFishMixin",
     "minecraft.client.settings.KeyBindingAccessor",
     "minecraft.gui.FontRendererMixin",
     "minecraftforge.client.GuiIngameForgeMixin"
