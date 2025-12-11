@@ -26,6 +26,7 @@ public class BedWarsHudModule extends Module implements HudModule {
 	private final DescriptionSetting disclaimer;
 	private final BooleanSetting editPosition;
 	private final BooleanSetting dropShadow;
+	private final BooleanSetting chroma;
 	private final BooleanSetting showTrap;
 	private final BooleanSetting showSharp;
 	private final BooleanSetting showProt;
@@ -38,6 +39,7 @@ public class BedWarsHudModule extends Module implements HudModule {
 				.registerSetting(new DescriptionSetting("Hypixel language must be ENGLISH!"));
 		editPosition = this.registerSetting(new BooleanSetting("Edit position", false));
 		dropShadow = this.registerSetting(new BooleanSetting("Drop shadow", true));
+		chroma = this.registerSetting(new BooleanSetting("Chroma", false));
 		showTrap = this.registerSetting(new BooleanSetting("Show trap", true));
 		showSharp = this.registerSetting(new BooleanSetting("Show sharpness", true));
 		showProt = this.registerSetting(new BooleanSetting("Show protection", true));
@@ -105,25 +107,26 @@ public class BedWarsHudModule extends Module implements HudModule {
 
 	private @NotNull List<@NotNull String> buildLines() {
 		final List<String> lines = new ArrayList<>();
+		final String color = chroma.getValue() ? "§r" : "§r§f";
 		if (showTrap.getValue()) {
 			if (trapQueue.isEmpty()) {
-				lines.add("§rTrap: §cNone");
+				lines.add(color + "Trap: §cNone");
 			} else {
-				lines.add("§rTrap: §a" + trapQueue.get(0));
+				lines.add(color + "Trap: §a" + trapQueue.get(0));
 			}
 		}
 		if (showSharp.getValue()) {
 			if (sharpUpgrades.isEmpty()) {
-				lines.add("§rSharp: §cNone");
+				lines.add(color + "Sharp: §cNone");
 			} else {
-				lines.add("§rSharp: §aI");
+				lines.add(color + "Sharp: §aI");
 			}
 		}
 		if (showProt.getValue()) {
 			if (protUpgrades.isEmpty()) {
-				lines.add("§rProt: §cNone");
+				lines.add(color + "Prot: §cNone");
 			} else {
-				lines.add("§rProt: §a" + protUpgrades.get(0));
+				lines.add(color + "Prot: §a" + protUpgrades.get(0));
 			}
 		}
 		return lines;
