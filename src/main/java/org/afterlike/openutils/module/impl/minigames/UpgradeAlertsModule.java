@@ -59,7 +59,7 @@ public class UpgradeAlertsModule extends Module {
 		if (player == mc.thePlayer)
 			return;
 		// TODO: add teammate check
-		final String teamKey = BedWarsUtil.getTeamName(player);
+		final String teamKey = BedWarsUtil.getFormattedTeamName(player);
 		if (teamKey == null)
 			return;
 		final Set<UpgradeType> upgrades = teamUpgrades.computeIfAbsent(teamKey,
