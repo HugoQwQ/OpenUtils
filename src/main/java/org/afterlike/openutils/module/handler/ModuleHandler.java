@@ -24,26 +24,28 @@ public class ModuleHandler {
 	public void initialize() {
 		OpenUtils.get().getEventBus().subscribe(this);
 		// movement
-		this.register(new NullMoveModule());
+		this.register(new NullMoveModule()); // TODO: impl
 		this.register(new SprintModule());
 		// player
 		this.register(new NoBreakDelayModule());
-		this.register(new NoJumpDelayModule());
-		this.register(new NoHitDelayModule());
+        this.register(new NoHitDelayModule());
+        this.register(new NoJumpDelayModule());
 		// render
-		this.register(new AntiShuffleModule());
-		this.register(new AntiDebuffModule());
+        this.register(new AntiDebuffModule());
+        this.register(new AntiShuffleModule());
 		this.register(new ArrayListModule());
 		this.register(new CameraModule());
 		// world
 		this.register(new AntiBotModule());
 		// minigames
-		this.register(new ResourceCountModule());
-		this.register(new UpgradeAlertsModule());
-		this.register(new ArmorAlertsModule());
-		this.register(new ItemAlertsModule());
+        this.register(new ArmorAlertsModule());
+        this.register(new BedWarsHudModule());
+        this.register(new ItemAlertsModule());
+        this.register(new LevelHiderModule()); // TODO: impl
+        this.register(new ResourceCountModule());
+        this.register(new UpgradeAlertsModule());
 		// other
-		this.register(new NameHiderModule());
+		this.register(new NameHiderModule()); // TODO: impl
 		// client
 		this.register(new DebugModule());
 		this.register(new GUIModule());
