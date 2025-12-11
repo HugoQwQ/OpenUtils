@@ -32,7 +32,7 @@ public class ResourceCountModule extends Module {
 		trackIron = this.registerSetting(new BooleanSetting("Track §fIron", false));
 		trackGold = this.registerSetting(new BooleanSetting("Track §6Gold", false));
 		trackDiamonds = this.registerSetting(new BooleanSetting("Track §bDiamonds", true));
-		trackEmeralds = this.registerSetting(new BooleanSetting("Track §aEmeralds", true));
+		trackEmeralds = this.registerSetting(new BooleanSetting("Track §2Emeralds", true));
 		pingSound = this.registerSetting(new BooleanSetting("Ping Sound", false));
 	}
 	private final Map<Item, Integer> lastCounts = new HashMap<>();
@@ -102,7 +102,7 @@ public class ResourceCountModule extends Module {
 		if (item == Items.diamond)
 			return EnumChatFormatting.AQUA + "Diamond";
 		if (item == Items.emerald)
-			return EnumChatFormatting.GREEN + "Emerald";
+			return EnumChatFormatting.DARK_GREEN + "Emerald";
 		return "Unknown";
 	}
 
