@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class OpenUtils {
 	private static final @NotNull Logger logger = LogManager.getLogger(OpenUtils.class);
 	private static final @Nullable OpenUtils instance = new OpenUtils();
-	private static final @NotNull String VERSION = "1.0";
+	private static final @NotNull String VERSION = org.afterlike.openutils.BuildConstants.VERSION;
 	private final @NotNull ModuleHandler moduleHandler;
 	private final @NotNull ConfigHandler configHandler;
 	private final @NotNull EventBus eventBus;

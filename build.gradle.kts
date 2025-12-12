@@ -3,13 +3,20 @@ import net.fabricmc.loom.task.RemapJarTask
 import org.apache.commons.lang3.SystemUtils
 
 // Buildscript based on https://github.com/lineargraph/Forge1.8.9Template (Unlicense)
+
+// Version from GitHub Tag:
+val gitRef : String? = System.getenv("GITHUB_REF_NAME")
+version = gitRef?.removePrefix("v") ?: "dev"
+
+// Plugins:
 plugins {
     idea
     java
+    id("net.kyori.blossom") version "2.2.0"
     id("gg.essential.loom") version "0.10.0.+"
     id("com.diffplug.spotless") version "8.1.0"
-    id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("dev.architectury.architectury-pack200") version "0.1.3"
 }
 
 // Toolchains:
@@ -48,8 +55,25 @@ loom {
     }
 }
 
-sourceSets.main {
-    output.setResourcesDir(sourceSets.main.flatMap { it.java.classesDirectory })
+// Blossom configuration:
+sourceSets {
+    main {
+        blossom {
+            resources {
+                property("version", project.version.toString())
+            }
+            javaSources {
+                property("version", project.version.toString())
+            }
+        }
+        output.setResourcesDir(sourceSets.main.flatMap { it.java.classesDirectory })
+    }
+}
+
+idea {
+    module {
+        generatedSourceDirs.add(file("build/generated/sources/blossom/main/java"))
+    }
 }
 
 // Spotless Configuration:
@@ -59,6 +83,8 @@ spotless {
         removeUnusedImports()
         eclipse().configFile("extras/eclipse-formatter.xml")
         formatAnnotations()
+
+        targetExclude("build/generated/**")
     }
 }
 
@@ -91,27 +117,23 @@ dependencies {
 tasks {
     withType(JavaCompile::class) {
         options.encoding = "UTF-8"
+        dependsOn("generateJavaTemplates", "generateResourceTemplates")
+    }
+
+    withType(ProcessResources::class) {
+        dependsOn("generateResourceTemplates")
     }
 
     withType(Jar::class) {
         archiveBaseName.set("OpenUtils")
+        archiveVersion.set(project.version.toString())
+        archiveClassifier.set("without-deps")
+        destinationDirectory.set(layout.buildDirectory.dir("intermediates"))
         manifest.attributes.run {
             this["FMLCorePluginContainsFMLMod"] = "true"
             this["ForceLoadAsMod"] = "true"
             this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
             this["MixinConfigs"] = "mixins.openutils.json"
-        }
-    }
-
-    withType(Jar::class) {
-        archiveBaseName.set("OpenUtils")
-        archiveVersion.set("1.0")
-
-        manifest.attributes.run {
-            this["MixinConfigs"] = "mixins.openutils.json"
-            this["FMLCorePluginContainsFMLMod"] = "true"
-            this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
-            this["ForceLoadAsMod"] = "true"
         }
     }
 
@@ -135,11 +157,6 @@ tasks {
         fun relocateInside(name: String) = relocate(name, "org.afterlike.openutils.lib.$name")
 
         relocateInside("com.google.gson")
-    }
-
-    jar {
-        archiveClassifier.set("without-deps")
-        destinationDirectory.set(layout.buildDirectory.dir("intermediates"))
     }
 
     assemble.get().dependsOn(remapJar)
