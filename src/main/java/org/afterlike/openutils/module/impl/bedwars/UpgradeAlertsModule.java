@@ -62,7 +62,9 @@ public class UpgradeAlertsModule extends Module {
 		final EntityPlayer player = (EntityPlayer) entity;
 		if (player == mc.thePlayer)
 			return;
-		// TODO: add teammate check
+        if (BedWarsUtil.isTeammate(mc.thePlayer, player)) {
+            return;
+        }
 		final String teamKey = BedWarsUtil.getFormattedTeamName(player);
 		if (teamKey == null)
 			return;

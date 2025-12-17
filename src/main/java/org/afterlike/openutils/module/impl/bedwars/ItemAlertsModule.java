@@ -24,6 +24,7 @@ import org.afterlike.openutils.module.api.setting.impl.BooleanSetting;
 import org.afterlike.openutils.module.api.setting.impl.DescriptionSetting;
 import org.afterlike.openutils.module.api.setting.impl.ModeSetting;
 import org.afterlike.openutils.util.client.ClientUtil;
+import org.afterlike.openutils.util.game.BedWarsUtil;
 import org.afterlike.openutils.util.game.GameModeUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -173,7 +174,9 @@ public class ItemAlertsModule extends Module {
 		if (player == mc.thePlayer) {
 			return;
 		}
-		// TODO: add teammate check
+        if (BedWarsUtil.isTeammate(mc.thePlayer, player)) {
+            return;
+        }
 		processItem(player, stack);
 	}
 
