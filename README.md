@@ -2,6 +2,9 @@
 
 OpenUtils is a **Minecraft utility mod** created to provide a **stable collection of common gameplay utilities** in a community where utility mods are frequently deleted, abandoned, or locked behind closed distribution.
 
+> [!WARNING]  
+> OpenUtils is provided as-is and used at your own risk. Some modules may be controversial; all are optional and restricted to behavior technically possible in vanilla Minecraft.
+
 ---
 
 ## Why OpenUtils Exists
