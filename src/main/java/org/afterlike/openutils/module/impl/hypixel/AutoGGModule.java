@@ -2,16 +2,28 @@ package org.afterlike.openutils.module.impl.hypixel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import org.afterlike.openutils.event.handler.EventHandler;
 import org.afterlike.openutils.event.impl.ReceiveChatEvent;
 import org.afterlike.openutils.module.api.Module;
 import org.afterlike.openutils.module.api.ModuleCategory;
+import org.afterlike.openutils.module.api.setting.impl.ModeSetting;
+import org.afterlike.openutils.module.api.setting.impl.NumberSetting;
 import org.afterlike.openutils.util.client.ClientUtil;
 import org.afterlike.openutils.util.client.TextUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class AutoGGModule extends Module {
+
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    private final @NotNull NumberSetting delay;
+
+    private final @NotNull ModeSetting content;
+
 	private static final @NotNull List<Pattern> GAME_END_PATTERNS = new ArrayList<>();
 	static {
 		String[] regexes = new String[]{
@@ -36,6 +48,8 @@ public class AutoGGModule extends Module {
 	}
 	public AutoGGModule() {
 		super("Auto GG", ModuleCategory.HYPIXEL);
+		delay = this.registerSetting(new NumberSetting("Send Delay", 2000, 0, 5000, 100));
+		content = this.registerSetting(new ModeSetting("Content Select", "GG", "gg", "GG", "gG <3"));
 	}
 
 	@EventHandler
@@ -51,6 +65,9 @@ public class AutoGGModule extends Module {
 	}
 
 	private void handleGameEnd() {
-		ClientUtil.sendMessageAsPlayer("/ac gg");
+		scheduler.schedule(
+				() -> ClientUtil.sendMessageAsPlayer("/ac " + content.getValue()),
+				delay.getValue().longValue(),
+				TimeUnit.MILLISECONDS);
 	}
 }
