@@ -19,11 +19,9 @@ public class AntiDebuffModule extends Module {
 	private void onUpdate() {
 		if (mc.thePlayer == null)
 			return;
-
 		if (nausea.getValue() && mc.thePlayer.isPotionActive(Potion.confusion)) {
 			mc.thePlayer.removePotionEffectClient(Potion.confusion.getId());
 		}
-
 		if (blindness.getValue() && mc.thePlayer.isPotionActive(Potion.blindness)) {
 			mc.thePlayer.removePotionEffectClient(Potion.blindness.getId());
 		}
