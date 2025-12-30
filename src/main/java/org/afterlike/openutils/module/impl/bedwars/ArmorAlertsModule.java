@@ -1,5 +1,7 @@
 package org.afterlike.openutils.module.impl.bedwars;
 
+import static org.afterlike.openutils.util.client.ClientUtil.sendMessageAsPlayer;
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +29,7 @@ public class ArmorAlertsModule extends Module {
 	private final BooleanSetting detectChainmail;
 	private final BooleanSetting detectIron;
 	private final BooleanSetting detectDiamond;
+	private final BooleanSetting alertTeamMates;
 	private final Map<String, ArmorType> playerArmor;
 	private enum ArmorType {
 		NONE, LEATHER, CHAINMAIL, IRON, DIAMOND
@@ -40,6 +43,8 @@ public class ArmorAlertsModule extends Module {
 		detectChainmail = this.registerSetting(new BooleanSetting("§fChainmail Armor", true));
 		detectIron = this.registerSetting(new BooleanSetting("§fIron Armor", true));
 		detectDiamond = this.registerSetting(new BooleanSetting("§bDiamond Armor", true));
+		alertTeamMates = this
+				.registerSetting(new BooleanSetting("§bAlert To Your Team Mates", true));
 		playerArmor = new HashMap<>();
 	}
 
@@ -94,6 +99,10 @@ public class ArmorAlertsModule extends Module {
 		ClientUtil.sendMessage(
 				player.getDisplayName().getFormattedText() + " §7bought " + armorMessage + " §7("
 						+ EnumChatFormatting.AQUA + distance + EnumChatFormatting.GRAY + ")");
+		if (alertTeamMates.getValue()) {
+			sendMessageAsPlayer("Enemy " + BedWarsUtil.getTeamName(player) + " " + player.getName()
+					+ " bought " + EnumChatFormatting.getTextWithoutFormattingCodes(armorMessage));
+		}
 		playPingIfEnabled(armorType);
 	}
 

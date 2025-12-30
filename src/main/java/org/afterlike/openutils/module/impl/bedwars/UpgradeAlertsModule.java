@@ -1,5 +1,7 @@
 package org.afterlike.openutils.module.impl.bedwars;
 
+import static org.afterlike.openutils.util.client.ClientUtil.sendMessageAsPlayer;
+
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.server.S04PacketEntityEquipment;
+import net.minecraft.util.EnumChatFormatting;
 import org.afterlike.openutils.event.handler.EventHandler;
 import org.afterlike.openutils.event.impl.ReceivePacketEvent;
 import org.afterlike.openutils.module.api.Module;
@@ -23,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class UpgradeAlertsModule extends Module {
 	private final DescriptionSetting desc;
+	private final BooleanSetting alertTeamMates;
 	private final BooleanSetting pingSound;
 	private final Map<String, Set<UpgradeType>> teamUpgrades;
 	private enum UpgradeType {
@@ -41,6 +45,7 @@ public class UpgradeAlertsModule extends Module {
 		desc = this.registerSetting(
 				new DescriptionSetting("Alerts you when teams purchase diamond upgrades"));
 		pingSound = this.registerSetting(new BooleanSetting("Ping Sound", true));
+		alertTeamMates = this.registerSetting(new BooleanSetting("Alert To Your Team Mates", true));
 		teamUpgrades = new HashMap<>();
 	}
 
@@ -83,6 +88,11 @@ public class UpgradeAlertsModule extends Module {
 
 	private void notifyUpgrade(@NotNull final String teamKey, @NotNull final String upgrade) {
 		ClientUtil.sendMessage(teamKey + " Team §7purchased §b" + upgrade);
+		if (alertTeamMates.getValue()) {
+			sendMessageAsPlayer(
+					EnumChatFormatting.getTextWithoutFormattingCodes(teamKey) + " Team purchased "
+							+ EnumChatFormatting.getTextWithoutFormattingCodes(upgrade));
+		}
 		if (pingSound.getValue()) {
 			mc.thePlayer.playSound("random.orb", 1.0F, 1.0F);
 		}
